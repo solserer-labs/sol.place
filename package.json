@@ -1,0 +1,8 @@
+{
+  "dependencies": {
+    "@solana/spl-name-service": "^0.1.2",
+    "@solana/web3.js": "^1.21.0",
+    "browserify": "^17.0.0",
+    "esmify": "^2.1.1"
+  }
+}
