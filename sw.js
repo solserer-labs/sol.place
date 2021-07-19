@@ -13,26 +13,10 @@ self.addEventListener("fetch", function (event) {
   console.log("fetch event");
   console.log(event);
   console.log("REQUEST:", event.request.url);
-  // window.location.href == "http://sample.somedomain.com/somedir/somepage.html"
   var parts = location.hostname.split(".");
   var subdomain = parts.shift();
   var upperleveldomain = parts.join(".");
   console.log("subdomain : ", subdomain);
-  //get from .sol
-  // let snsData = ""
-  // event.waitUntil((async function() {
-  //   snsData = await dnsBundle.resolveDomainName(subdomain);
-  //   console.log("sns data: " + snsData.data.toString().trim())
-  // })());
- 
-  // let ipfsHash = snsData.data.toString().trim();
-  // let nUrl = event.request.url.replace(subdomain + ".", "");
-  // nUrl = nUrl.replace(
-  //   "http://localhost:8000",
-  //   "https://ipfs.infura.io/ipfs/" + ipfsHash
-  // );
-  // console.log("REQUEST REPLACED:", nUrl);
-  // var req = new Request(nUrl, { redirect: "follow" });
   event.respondWith(
     handleRequest(event.request, subdomain)
     );
