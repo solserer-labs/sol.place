@@ -32,7 +32,7 @@ const handleRequest = async (request, domain) => {
     "https://ipfs.infura.io/ipfs/" + ipfsHash
   );
   nUrl = nUrl.replace(
-    "https://sol.place/",
+    "https://sol.place",
     "https://ipfs.infura.io/ipfs/" + ipfsHash
   );
   console.log("REQUEST REPLACED:", nUrl);
