@@ -1,7 +1,8 @@
-<<<<<<< HEAD
+
 node_modules
 
 *.py
+=======
 =======
 # Logs
 logs
@@ -107,4 +108,3 @@ dist
 
 # TernJS port file
 .tern-port
->>>>>>> Initial commit
