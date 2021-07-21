@@ -31,6 +31,10 @@ const handleRequest = async (request, domain) => {
     "http://localhost:8000",
     "https://ipfs.infura.io/ipfs/" + ipfsHash
   );
+  nUrl = nUrl.replace(
+    "https://sol.place/",
+    "https://ipfs.infura.io/ipfs/" + ipfsHash
+  );
   console.log("REQUEST REPLACED:", nUrl);
   var req = new Request(nUrl, { redirect: "follow" });
   let response = await fetch(req);
