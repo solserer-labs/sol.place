@@ -17,14 +17,26 @@ self.addEventListener("fetch", function (event) {
   var subdomain = parts.shift();
   var upperleveldomain = parts.join(".");
   console.log("subdomain : ", subdomain);
-  event.respondWith(
-    handleRequest(event.request, subdomain)
+  if(!event.request.url.contains("sol.place")){
+    event.respondWith(
+      fetch(event.request)
+    )   
+  }else {
+    event.respondWith(
+    
+      handleRequest(event.request, subdomain)
     );
+  }
+  
 });
+const getHash = async () =>  {
 
+};
 const handleRequest = async (request, domain) => {
-  let snsData = await dnsBundle.resolveDomainName(domain);
+  //let snsData = await dnsBundle.resolveDomainName(domain);
   //console.log("sns data: " + snsData.data.toString().trim())
+  //let ipfsHash = snsData.data.toString('utf-8').replace(/\0/g, '');
+  //need to store
   let ipfsHash = snsData.data.toString('utf-8').replace(/\0/g, '');
   let nUrl = request.url.replace(domain + ".", "");
   nUrl = nUrl.replace(
