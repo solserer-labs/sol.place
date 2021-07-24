@@ -6,7 +6,9 @@ if ('serviceWorker' in navigator) {
           console.log('ServiceWorker registration successful with scope: ', registration.scope);
           if(!interceptorLoaded){
             //refresh after interceptor was loaded but only if the interceptor was not already loaded.
-            window.location=window.location.href; 
+            //window.location=window.location.href; 
+            window.location.reload();
+
           }
       },
         function(err) { // registration failed :( 

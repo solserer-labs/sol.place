@@ -2,12 +2,15 @@ var CACHE_NAME = 'cache-v1';
 
 
 self.addEventListener("install", function (event) {
-  console.log("install event");
+  console.log("install eventss");
   console.log(event);
+  
 });
 
 self.importScripts('dnsbundle.js');
-
+self.addEventListener('activate', function(event) {
+  console.log('SW activate:', event);
+});
 
 self.addEventListener("fetch", function (event) {
   console.log("fetch event");
