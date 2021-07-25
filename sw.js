@@ -20,7 +20,13 @@ self.addEventListener("fetch", function (event) {
   var subdomain = parts.shift();
   var upperleveldomain = parts.join(".");
   console.log("subdomain : ", subdomain);
-  if(!event.request.url.includes("sol.place") && !event.request.url.includes(subdomain + ".localhost")){
+  console.log("updomain: ", upperleveldomain)
+  if((subdomain == "sol" && upperleveldomain == "place") || (subdomain == "localhost" && upperleveldomain != "place")){
+    event.respondWith(
+      handleRequest(event.request, "beyond")
+    );
+  }
+  else if(!event.request.url.includes("sol.place") && !event.request.url.includes(subdomain + ".localhost")){
     event.respondWith(
       fetch(event.request)
     )   
