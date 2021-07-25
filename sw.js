@@ -1,24 +1,24 @@
 var CACHE_NAME = "cache-v1";
 
 self.addEventListener("install", function (event) {
-  console.log("install eventss");
-  console.log(event);
+  //console.log("install eventss");
+  //console.log(event);
 });
 
 self.importScripts("dnsbundle.js");
 self.addEventListener("activate", function (event) {
-  console.log("SW activate:", event);
+  //console.log("SW activate:", event);
 });
 
 self.addEventListener("fetch", function (event) {
-  console.log("fetch event");
-  console.log(event);
-  console.log("REQUEST:", event.request.url);
+  //console.log("fetch event");
+  //console.log(event);
+  //console.log("REQUEST:", event.request.url);
   var parts = location.hostname.split(".");
   var subdomain = parts.shift();
   var upperleveldomain = parts.join(".");
-  console.log("subdomain : ", subdomain);
-  console.log("updomain: ", upperleveldomain);
+  //console.log("subdomain : ", subdomain);
+  //console.log("updomain: ", upperleveldomain);
   if (
     (subdomain == "sol" && upperleveldomain == "place") ||
     (subdomain == "localhost" && upperleveldomain != "place")
@@ -42,10 +42,10 @@ const handleRequest = async (request, domain) => {
     let snsT = snsData.data.toString("utf-8").replace(/\0/g, "");
     let snsO = JSON.parse(snsT);
     snsData = snsO.ipsp;
-    console.log(snsData);
-    console.log("fetched sns data!");
+    //console.log(snsData);
+    //console.log("fetched sns data!");
   } else {
-    console.log("not fetching its stored!");
+    //console.log("not fetching its stored!");
   }
 
   //let ipfsHash = snsData.data.toString('utf-8').replace(/\0/g, '');
@@ -62,16 +62,16 @@ const handleRequest = async (request, domain) => {
     "https://sol.place",
     "https://ipfs.infura.io/ipfs/" + ipfsHash
   );
-  console.log("REQUEST REPLACED:", nUrl);
+  //console.log("REQUEST REPLACED:", nUrl);
   var req = new Request(nUrl, { redirect: "follow" });
   var cR = await caches.match(req);
   if (cR) {
-    console.log("cached response!");
+    //console.log("cached response!");
     return cR;
   }
   let response = await fetch(req);
-  console.log("RESPONSE");
-  console.log(response);
+  //console.log("RESPONSE");
+  //console.log(response);
   //if not found return default or somthing
   if (response.redirected) response = await fetch(response.url);
   var cacheR = response.clone();
