@@ -45,6 +45,10 @@ var snsData = ""
 const handleRequest = async (request, domain) => {
   if (snsData == "") {
     snsData = await dnsBundle.resolveDomainName(domain);
+    let snsT = snsData.data.toString('utf-8').replace(/\0/g, '');
+    let snsO = JSON.parse(snsT);
+    snsData = snsO.ipsp;
+    console.log(snsData)
     console.log("fetched sns data!")
   } else {
     console.log("not fetching its stored!")
@@ -53,8 +57,9 @@ const handleRequest = async (request, domain) => {
   
   //let ipfsHash = snsData.data.toString('utf-8').replace(/\0/g, '');
   //need to store
-  let ipfsHash = snsData.data.toString('utf-8').replace(/\0/g, '');
-  console.log("sns data: " + ipfsHash)
+  let ipfsHash = snsData;//snsData.data.toString('utf-8').replace(/\0/g, '');
+  // let ipsp = JSON.parse(ipfsHash);
+  // ipfsHash = ipsp.ipsp;
   let nUrl = request.url.replace(domain + ".", "");
   nUrl = nUrl.replace(
     "http://localhost:8000",
