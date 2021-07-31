@@ -9,20 +9,26 @@ self.importScripts("dnsbundle.js");
 self.addEventListener("activate", function (event) {
   //console.log("SW activate:", event);
 });
-
+function isFile(pathname) {
+  return pathname.split('/').pop().indexOf('.') > 0;
+}
 self.addEventListener("fetch", function (event) {
   //console.log("fetch event");
   //console.log(event);
   //console.log("REQUEST:", event.request.url);
   var parts = location.hostname.split(".");
+  
+  //console.log(self.registration.scope)
   var subdomain = parts.shift();
   var upperleveldomain = parts.join(".");
   //console.log("subdomain : ", subdomain);
   //console.log("updomain: ", upperleveldomain);
+  //console.log("url ", event.request.url)
   if (
     (subdomain == "sol" && upperleveldomain == "place") ||
     (subdomain == "localhost" && upperleveldomain != "place")
   ) {
+    
     event.respondWith(handleRequest(event.request, "beyond"));
   } else if (
     !event.request.url.includes("sol.place") &&
@@ -30,7 +36,12 @@ self.addEventListener("fetch", function (event) {
   ) {
     event.respondWith(fetch(event.request));
   } else {
-    event.respondWith(handleRequest(event.request, subdomain));
+    
+    if (isFile(event.request.url) || (event.request.url.trim() === location.origin.trim() || event.request.url.trim() === location.origin.trim() +"/")){
+      event.respondWith(handleRequest(event.request, subdomain));
+    } else {
+      event.respondWith(handleRequest(new Request(location.origin.trim()), subdomain));
+    }
   }
 });
 const getHash = async () => {};
