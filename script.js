@@ -1,3 +1,6 @@
+
+
+
 if ('serviceWorker' in navigator) { 
     var interceptorLoaded = navigator.serviceWorker.controller!=null;
     window.addEventListener('load', function() { 
